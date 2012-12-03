@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  user: 
+  person: 
+  value: 1
+  user_agent: MyString
+  ip_address: MyString
+
+two:
+  user: 
+  person: 
+  value: 1
+  user_agent: MyString
+  ip_address: MyString

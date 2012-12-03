@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  user_name: MyString
+  password_digest: MyString
+  is_staff: false
+  is_admin: false
+  is_active: false
+
+two:
+  user_name: MyString
+  password_digest: MyString
+  is_staff: false
+  is_admin: false
+  is_active: false
