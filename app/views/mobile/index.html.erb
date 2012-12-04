@@ -27,11 +27,11 @@
             <div class="field">
                 <fieldset data-role="controlgroup" id='person-{{index}}-controlgroup'>
                     <!-- TODO: 5 buttons or radio buttons? -->
-                    <a href="#observations?person={{index}}&amp;value=1" data-role="button">1 :)</a>
-                    <a href="#observations?person={{index}}&amp;value=2" data-role="button">2</a>
-                    <a href="#observations?person={{index}}&amp;value=3" data-role="button">3 :|</a>
-                    <a href="#observations?person={{index}}&amp;value=4" data-role="button">4</a>
-                    <a href="#observations?person={{index}}&amp;value=5" data-role="button">5 :(</a>
+                    <a href="#observations?person={{id}}&amp;value=1" data-role="button">1 :)</a>
+                    <a href="#observations?person={{id}}&amp;value=2" data-role="button">2</a>
+                    <a href="#observations?person={{id}}&amp;value=3" data-role="button">3 :|</a>
+                    <a href="#observations?person={{id}}&amp;value=4" data-role="button">4</a>
+                    <a href="#observations?person={{id}}&amp;value=5" data-role="button">5 :(</a>
                 </fieldset>
             </div>
             <a href="#home" data-role="button" >Back</a>
@@ -155,11 +155,10 @@
         }
     }
     
-    function postObservation(person_index, value){
-        var person = persons_list.persons[person_index]['resource_uri'];
-        console.log(person);
-        var json_data = JSON.stringify({'person': person, 'value': value})
-        $.ajax("/api/v1/observation/", {
+    function postObservation(person_id, value){
+        console.log(person_id);
+        var json_data = JSON.stringify({'person_id': person_id, 'value': value})
+        $.ajax("/observation/create", {
             cache: false,
             data: json_data,
             type: 'POST',
@@ -179,6 +178,7 @@
                 console.log(textStatus, errorThrown);
             }
         });
+        $.mobile.changePage("#home");
     }
 </script>
 

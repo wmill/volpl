@@ -1,14 +1,21 @@
 class ObservationController < ApplicationController
   def create
-    @observation = Observation.new(params[:user])
+    
+    @observation = Observation.new(params[:observation])
+    #need to add user_agent, ip_address, user_id
+
+    @observation[:ip_address] = request.remote_ip
+    @observation[:user_agent] = request.env['HTTP_USER_AGENT']
+    @observation[:user_id] = 0
+    
+    
 
     respond_to do |format|
-      if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
-        format.json { render json: @user, status: :created, location: @user }
+      if @observation.save
+        format.json { render json: @observation, status: :created }
       else
-        format.html { render action: "new" }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+
+        format.json { render json: @observation.errors, status: :unprocessable_entity }
       end
     end
   end
