@@ -8,7 +8,6 @@ class ObservationController < ApplicationController
     @observation[:user_agent] = request.env['HTTP_USER_AGENT']
     @observation[:user_id] = 0
     
-    sleep 10
 
     
 
