@@ -53,8 +53,8 @@
     window.persons_list = [];
     
     $(function() {
-        $.getJSON('/api/v1/person/?format=json', function(data){
-            window.persons_list['persons'] = data.objects;
+        $.getJSON('/people', function(data){
+            window.persons_list['persons'] = data;
             addIndexToObjectList(persons_list.persons);
             var template = $('#person-list-template').html();
             var html = Mustache.to_html(template, persons_list);
