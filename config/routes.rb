@@ -1,4 +1,6 @@
 Mobitrack3::Application.routes.draw do
+  get "observation/create"
+
   get "observation/new"
 
   resources :users
