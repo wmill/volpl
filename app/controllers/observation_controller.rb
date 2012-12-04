@@ -8,7 +8,8 @@ class ObservationController < ApplicationController
     @observation[:user_agent] = request.env['HTTP_USER_AGENT']
     @observation[:user_id] = 0
     
-
+    #to demo responsiveness on slow connections
+    sleep 3
     
 
     respond_to do |format|
