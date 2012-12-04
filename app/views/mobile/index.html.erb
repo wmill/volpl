@@ -17,6 +17,17 @@
       </li>
     {{/persons}}
     </script>
+
+    <script id="error-list-template" type="text/mustache-template">
+      <li id='error-{{person.id}}'>
+        <a href="#" >
+            <h3>{{person.first_name}} {{person.last_name}} &mdash; {{person.riding}}<h3>
+            <p>Value: {{value}}</p>
+            <p>{{error}}</p>
+            <p>{{status}}</p>
+        </a>
+      </li>
+    </script>
     
     <script id="person-view-template" type="text/mustache-template">
     <div id="person-{{index}}-view-page" data-role="page">
@@ -51,16 +62,18 @@
 	
 <script type="text/javascript" charset="utf-8">
     window.persons_list = [];
+    window.person_index_by_id = {};
     
     $(function() {
         $.getJSON('/people', function(data){
             window.persons_list['persons'] = data;
             addIndexToObjectList(persons_list.persons);
+            createIdIndex(persons_list.persons, person_index_by_id);
             var template = $('#person-list-template').html();
             var html = Mustache.to_html(template, persons_list);
 
             $('#delegate-list').html(html);
-            $('#delegate-list').listview('refresh')
+            $('#delegate-list').listview('refresh');
         });
 
  
@@ -154,6 +167,12 @@
             list[i]["index"] = i;
         }
     }
+    function createIdIndex(list, index_dict){
+        for (i=0;i<list.length;i++){
+            index_dict[list[i]["id"]] = i;
+        }        
+    }
+    
     
     function postObservation(person_id, value){
         console.log(person_id);
@@ -176,9 +195,19 @@
             error: function(jqXHR, textStatus, errorThrown) {
                 //TODO: Actually handle errors
                 console.log(textStatus, errorThrown);
+                var person = person_index_by_id[person_id];
+                var template = $('#error-list-template').html();
+                var html = Mustache.to_html(template, {'person': person, 'value':value,'status': textStatus, 'error': errorThrown});
+                $('#error-connection-ul').append(html);
+                $('#error-connection-ul').listview('refresh');
             }
         });
         $.mobile.changePage("#home");
+    }
+    
+    function repostObservation(person_id, value){
+        //remove li
+        $("#error-")
     }
 </script>
 
@@ -208,7 +237,9 @@
 
 <div id='connections' data-role='page'>
     TODO:  Put stuff here.
-    <ul id='connection-ul' data-role="listview" data-inset="true">
+    <ul id='active-connection-ul' data-role="listview" data-inset="true">
+    </ul>
+    <ul id='error-connection-ul' data-role="listview" data-inset="true">
     </ul>    
     <div data-role="footer" data-id="page-footer" data-position="fixed">
     	<div data-role="navbar">
