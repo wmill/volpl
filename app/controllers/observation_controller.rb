@@ -9,7 +9,8 @@ class ObservationController < ApplicationController
     @observation[:user_id] = 0
     
     #to demo responsiveness on slow connections
-    sleep 3
+    sleep 8
+    
     
 
     respond_to do |format|
