@@ -6,6 +6,52 @@
 #   cities = City.create([{ name=> 'Chicago' }, { name=> 'Copenhagen' }])
 #   Mayor.create(name=> 'Emanuel', city=> cities.first)
 
+users = User.create(
+  [
+    {
+      'user_name' => 'demo',
+      'password' => 'dev',
+      'password_confirmation' => 'dev',
+      'is_active' => true,
+      'is_staff' => false,
+      'is_admin' => false,
+    },
+    {
+      'user_name' => 'demo1',
+      'password' => 'dev',
+      'password_confirmation' => 'dev',
+      'is_active' => true,
+      'is_staff' => false,
+      'is_admin' => false,
+    },
+    {
+      'user_name' => 'demo2',
+      'password' => 'dev',
+      'password_confirmation' => 'dev',
+      'is_active' => true,
+      'is_staff' => false,
+      'is_admin' => false,
+    },
+    {
+      'user_name' => 'staff',
+      'password' => 'dev',
+      'password_confirmation' => 'dev',
+      'is_active' => true,
+      'is_staff' => true,
+      'is_admin' => false,
+    },
+    {
+      'user_name' => 'admin',
+      'password' => 'dev',
+      'password_confirmation' => 'dev',
+      'is_active' => true,
+      'is_staff' => true,
+      'is_admin' => true,
+    },
+  ]
+)
+
+
 people = Person.create(
   [{'first_name'=> 'Janice', 'last_name'=> 'Resnick', 'riding'=> 'Ajax--Pickering'},
    {'first_name'=> 'Betty', 'last_name'=> 'Stclair', 'riding'=> 'Ajax--Pickering'},
@@ -426,3 +472,6 @@ people = Person.create(
    {'first_name'=> 'David', 'last_name'=> 'Morris', 'riding'=> 'York--Simcoe'},
    {'first_name'=> 'Wilbert', 'last_name'=> 'Elliott', 'riding'=> 'York--Simcoe'}]
 )
+
+
+

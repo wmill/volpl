@@ -38,7 +38,7 @@
     <script id="person-view-template" type="text/mustache-template">
     <div id="person-{{index}}-view-page" data-role="page">
         <div id="person-view-header-{{index}}" data-role="header"><h1>{{first_name}} {{last_name}}</h1>
-          <a data-role="button" href="/logout" data-icon="gear" data-iconpos="left" class="ui-btn-right">
+          <a data-role="button" href="/logout" data-icon="gear" data-iconpos="left" class="ui-btn-right" data-ajax="false">
             Log Out
           </a>
         </div>
@@ -262,7 +262,7 @@
 <body>
 <div id="home" data-role="page">
   <div data-role="header"><h1>Delegates</h1>
-    <a data-role="button" href="/logout" data-icon="gear" data-iconpos="left" class="ui-btn-right">
+    <a data-role="button" href="/logout" data-icon="gear" data-iconpos="left" class="ui-btn-right" data-ajax="false">
       Log Out
     </a>
   </div>

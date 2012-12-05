@@ -1,13 +1,38 @@
-<h1>Log In</h1>
+<!DOCTYPE html> 
+<html>
 
-<%= form_tag sessions_path do %>
-  <div class="field">
-    <%= label_tag :email %><br />
-    <%= text_field_tag :email, params[:email] %>
-  </div>
-  <div class="field">
-    <%= label_tag :password %><br />
-    <%= password_field_tag :password %>
-  </div>
-  <div class="actions"><%= submit_tag "Log In" %></div>
-<% end %>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<title>Mobitrack</title> 
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+	<%= javascript_include_tag "jquery-1.8.2.min" %>
+	<%= javascript_include_tag "jquery.mobile-1.2.0.min" %>
+</head>
+<body>
+<!-- Home -->
+<div data-role="page" id="login">
+    <div data-role="content">
+        <%= form_tag sessions_path, 'data-ajax'=>"false" do %>
+            <div data-role="fieldcontain">
+                <fieldset data-role="controlgroup">
+                    <label for="user_name">
+                        User Name
+                    </label>
+                    <%= text_field_tag :user_name, params[:user_name] %>
+                </fieldset>
+            </div>
+            <div data-role="fieldcontain">
+                <fieldset data-role="controlgroup">
+                    <label for="password">
+                        Password
+                    </label>
+                    <%= password_field_tag :password %>
+                </fieldset>
+            </div>
+            <%= submit_tag "Log In" %>
+        <% end %>
+    </div>
+</div>
+</body>
+</html>
