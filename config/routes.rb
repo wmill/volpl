@@ -5,9 +5,12 @@ Mobitrack3::Application.routes.draw do
 
   get "mobile/index"
 
-  get "sessions/new"
-
-  resources :people
+  get 'login', to: 'sessions#new', as: 'login'
+  get 'logout', to: 'sessions#destroy', as: 'logout'
+  
+  get 'people/index'
+  
+  #resources :people
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
