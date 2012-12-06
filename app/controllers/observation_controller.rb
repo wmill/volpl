@@ -10,7 +10,7 @@ class ObservationController < ApplicationController
     @observation[:user_id] = session[:user_id]
     
     #to demo responsiveness on slow connections
-    sleep 8
+    #sleep 8
     
     
 
