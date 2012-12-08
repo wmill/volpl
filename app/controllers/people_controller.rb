@@ -3,7 +3,7 @@ class PeopleController < ApplicationController
   # GET /people
   # GET /people.json
   def index
-    @people = Person.all :limit => 50
+    @people = Person.all :order => 'riding', :limit => 300
     render json: @people
   end
 
