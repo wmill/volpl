@@ -2,13 +2,13 @@
 <html>
 
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1"> 
-	<title>Mobitrack</title> 
-	<%= stylesheet_link_tag "jquery.mobile-1.2.0.css" %>
-	<%= javascript_include_tag "jquery-1.8.2.min" %>
-	<%= javascript_include_tag "jquery.mobile-1.2.0.min" %>
-	<%= javascript_include_tag "mustache.min" %>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"> 
+    <title>Mobitrack</title> 
+    <%= stylesheet_link_tag "jquery.mobile-1.2.0.css" %>
+    <%= javascript_include_tag "jquery-1.8.2.min" %>
+    <%= javascript_include_tag "jquery.mobile-1.2.0.min" %>
+    <%= javascript_include_tag "mustache.min" %>
 
 
     <script id="person-list-template" type="text/mustache-template">
@@ -59,19 +59,19 @@
             
         </div>
         <div data-role="footer" data-id="page-footer" data-position="fixed">
-        	<div data-role="navbar">
-        	    <ul>
-        	        <li><a href="#home">People</a></li>
-        	        <li><a href="#connections">Connections</a></li>
-        	    </ul>
-        	</div>
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="#home">People</a></li>
+                    <li><a href="#connections">Connections</a></li>
+                </ul>
+            </div>
         </div>
     </div>
     </script>
     
-	
+    
 <script type="text/javascript" charset="utf-8">
-    window.persons_list = [];
+    window.persons_list = {};
     window.person_index_by_id = {};
     
     $(function() {
@@ -89,36 +89,36 @@
  
         // Listen for any attempts to call changePage().
         $(document).bind( "pagebeforechange", function( e, data ) {
-        	if ( typeof data.toPage === "string" ) {
-        		var u = $.mobile.path.parseUrl( data.toPage );
-        		if ( u.hash.search(/^#persons/) !== -1 ) {
-        			//console.log(data.options);
-        			var person_index = ( 
-        			    hash2json(u.hash)['person']
-    			    );
-        			showPerson(u, person_index, data.options );
+            if ( typeof data.toPage === "string" ) {
+                var u = $.mobile.path.parseUrl( data.toPage );
+                if ( u.hash.search(/^#persons/) !== -1 ) {
+                    //console.log(data.options);
+                    var person_index = ( 
+                        hash2json(u.hash)['person']
+                    );
+                    showPerson(u, person_index, data.options );
 
-        			// Make sure to tell changePage() we've handled this call so it doesn't
-        			// have to do anything.
-        			e.preventDefault();
-        		}
-        	}
+                    // Make sure to tell changePage() we've handled this call so it doesn't
+                    // have to do anything.
+                    e.preventDefault();
+                }
+            }
         });
- 		// bind the pagebeforechange event for the new page
-		// these event listers are added to the global scope and chained.
-		$(document).bind( "pagebeforechange", function( e, data ) {
-        	if ( typeof data.toPage === "string" ) {
-        		var u = $.mobile.path.parseUrl( data.toPage );
-        		if ( u.hash.search(/^#observations/) !== -1 ) {
-        			var hash_vars = hash2json(u.hash);
-        			console.log(hash_vars);
-        			postObservation(hash_vars['person'], hash_vars['value']);
+        // bind the pagebeforechange event for the new page
+        // these event listers are added to the global scope and chained.
+        $(document).bind( "pagebeforechange", function( e, data ) {
+            if ( typeof data.toPage === "string" ) {
+                var u = $.mobile.path.parseUrl( data.toPage );
+                if ( u.hash.search(/^#observations/) !== -1 ) {
+                    var hash_vars = hash2json(u.hash);
+                    console.log(hash_vars);
+                    postObservation(hash_vars['person'], hash_vars['value']);
                     $.mobile.changePage("#home");
-        			// Make sure to tell changePage() we've handled this call so it doesn't
-        			// have to do anything.
-        			e.preventDefault();
-        		}
-        	}
+                    // Make sure to tell changePage() we've handled this call so it doesn't
+                    // have to do anything.
+                    e.preventDefault();
+                }
+            }
         });
         
         //enhance the connection page, normally done lazily, but we need to write to it in the background
@@ -130,35 +130,30 @@
     
 
     function showPerson(urlObj, person_index, options ){
-        //var person_index = parseInt(person_id);
-        var template = $('#person-view-template').html();
-        var html = Mustache.to_html(template, persons_list['persons'][person_index]);
         var page_element_id = "#person-" +  person_index  + "-view-page";
-        //console.log(html);
         
         //add a new page if it doesn't exist
         if ($(page_element_id).length == 0){
+            var template = $('#person-view-template').html();
+            var html = Mustache.to_html(template, persons_list['persons'][person_index]);
             $("#home").after(html);
         }
         
         var $page = $(page_element_id);
-
-
-
         //do jqm formatting 
         $page.page();
         
         /// From sample code ...
         // We don't want the data-url of the page we just modified
-		// to be the url that shows up in the browser's location field,
-		// so set the dataUrl option to the URL for the category
-		// we just loaded.
-		options.dataUrl = urlObj.href;
-		
-		// Now call changePage() and tell it to switch to
-		// the page we just modified.
-		$.mobile.changePage( $page, options );
-		
+        // to be the url that shows up in the browser's location field,
+        // so set the dataUrl option to the URL for the category
+        // we just loaded.
+        options.dataUrl = urlObj.href;
+        
+        // Now call changePage() and tell it to switch to
+        // the page we just modified.
+        $.mobile.changePage( $page, options );
+        
 
     }
     
@@ -215,20 +210,11 @@
             success: function(data, textStatus, jqXHR){
                 //yay
                 $("#active-" + person_id).remove();
-                console.log("Success!");
-                console.log(data);
-                
-                //TODO: remove from list
             },
             
             error: function(jqXHR, textStatus, errorThrown) {
                 $("#active-" + person_id).remove();
-                //TODO: Actually handle errors
-                console.log(textStatus, errorThrown);
-
                 var template = $('#error-list-template').html();
-                console.log("Person:",person, "Person index:", person_index);
-                console.log("func_data", {'person': person, 'value':value,'status': textStatus, 'error': errorThrown});
                 var html = Mustache.to_html(template, {
                     'id': person.id,
                     'first_name': person.first_name ,
@@ -238,7 +224,6 @@
                     'status': textStatus, 
                     'error': errorThrown
                 });
-                console.log(html);
                 $('#error-connection-ul').append(html);
                 $('#error-connection-ul').listview('refresh');
             }
@@ -249,8 +234,7 @@
     function repostObservation(person_id, value){
         //remove li
         $("#error-" + person_id).remove();
-        postObservation(person_id, value);
-        
+        postObservation(person_id, value);        
     }
 </script>
 
@@ -258,7 +242,7 @@
 
 </head> 
 
-	
+    
 <body>
 <div id="home" data-role="page">
   <div data-role="header"><h1>Delegates</h1>
@@ -268,17 +252,17 @@
   </div>
   <div data-role="content">
 
-  	<ul data-role="listview" data-inset="true" data-filter="true" id='delegate-list'>
+    <ul data-role="listview" data-inset="true" data-filter="true" id='delegate-list'>
 
     </ul>
   </div>
   <div data-role="footer" data-id="page-footer" data-position="fixed">
-  	<div data-role="navbar">
-  	    <ul>
-  	        <li><a href="#home">People</a></li>
-  	        <li><a href="#connections">Connections</a></li>
-  	    </ul>
-  	</div>
+    <div data-role="navbar">
+        <ul>
+            <li><a href="#home">People</a></li>
+            <li><a href="#connections">Connections</a></li>
+        </ul>
+    </div>
   </div>
 </div>
 
@@ -290,12 +274,12 @@
     <ul id='error-connection-ul' data-role="listview" data-inset="true">
     </ul>    
     <div data-role="footer" data-id="page-footer" data-position="fixed">
-    	<div data-role="navbar">
-    	    <ul>
-    	        <li><a href="#home">People</a></li>
-    	        <li><a href="#connections">Connections</a></li>
-    	    </ul>
-    	</div>
+        <div data-role="navbar">
+            <ul>
+                <li><a href="#home">People</a></li>
+                <li><a href="#connections">Connections</a></li>
+            </ul>
+        </div>
     </div>
 </div>
 
