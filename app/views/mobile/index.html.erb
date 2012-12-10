@@ -75,15 +75,23 @@
     window.person_index_by_id = {};
     
     $(function() {
-        $.getJSON('/people', function(data){
-            window.persons_list['persons'] = data;
-            addIndexToObjectList(persons_list.persons);
-            createIdIndex(persons_list.persons, person_index_by_id);
-            var template = $('#person-list-template').html();
-            var html = Mustache.to_html(template, persons_list);
+        $.ajax({
+            'url':'/people',
+            'dataType':'json',
+            
+            success: function(data){
+                window.persons_list['persons'] = data;
+                addIndexToObjectList(persons_list.persons);
+                createIdIndex(persons_list.persons, person_index_by_id);
+                var template = $('#person-list-template').html();
+                var html = Mustache.to_html(template, persons_list);
 
-            $('#delegate-list').html(html);
-            $('#delegate-list').listview('refresh');
+                $('#delegate-list').html(html);
+                $('#delegate-list').listview('refresh');
+            },
+            error: function(jqXHR) {
+                $('#connection_error_dialog').popup();
+            }
         });
 
  
@@ -262,6 +270,16 @@
             <li><a href="#home">People</a></li>
             <li><a href="#connections">Connections</a></li>
         </ul>
+    </div>
+  </div>
+  <div data-role="popup" id="connection_error_dialog" data-overlay-theme="a" data-theme="c" style="max-width:400px;" class="ui-corner-all">
+    <div data-role="header" data-theme="a" class="ui-corner-top">
+        <h1>Connection Error</h1>
+    </div>
+    <div data-role="content"  data-theme="d" class="ui-corner-bottom ui-content">
+        <h3 class="ui-title">Could not load "People"</h3>
+        <p>Unable to populate list. Please reload page.</p>  
+        <a href="#" data-role="button" data-inline="true" data-rel="back" data-transition="flow" data-theme="b">OK</a>  
     </div>
   </div>
 </div>
