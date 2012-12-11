@@ -3,5 +3,4 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 
-//= require jquery.mobile-1.2.0.min
-//= require mustache.min
+//= require jquery
