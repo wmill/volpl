@@ -14,13 +14,11 @@ class ObservationController < ApplicationController
     
     
 
-    respond_to do |format|
-      if @observation.save
-        format.json { render json: @observation, status: :created }
-      else
 
-        format.json { render json: @observation.errors, status: :unprocessable_entity }
-      end
+    if @observation.save
+      render json: @observation, status: :created 
+    else
+      render json: @observation.errors, status: :unprocessable_entity 
     end
   end
 end
