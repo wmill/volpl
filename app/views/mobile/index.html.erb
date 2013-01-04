@@ -9,23 +9,26 @@
     <%= javascript_include_tag "jquery-1.8.2.min" %>
     <%= javascript_include_tag "jquery.mobile-1.2.0.min" %>
     <%= javascript_include_tag "mustache.min" %>
+    <%= javascript_include_tag "underscore-min" %>
 
 
     <script id="person-list-template" type="text/mustache-template">
     {{#persons}}
       <li id='person-{{id}}'>
-        <a href="#persons?person={{index}}" >{{first_name}} {{last_name}} &mdash; {{riding}}</a>
+        <a href="#persons?person={{id}}" >{{first_name}} {{last_name}} &mdash; {{riding}}</a>
       </li>
     {{/persons}}
     </script>
 
     <script id="riding-divider-template" type="text/mustache-template">
-    <li data-role="list-divider">{{riding}}</li>
-    {{#persons}}
+    {{#ridings}}
+    <li data-role="list-divider">{{riding_name}}</li>
+    {{#people}}
       <li id='person-{{id}}'>
-        <a href="#persons?person={{index}}" >{{first_name}} {{last_name}} &mdash; {{riding}}</a>
+        <a href="#persons?person={{id}}" >{{first_name}} {{last_name}} &mdash; {{riding}}</a>
       </li>
-    {{/persons}}
+    {{/people}}
+    {{/ridings}}
     </script>
 
     <script id="error-list-template" type="text/mustache-template">
@@ -45,13 +48,13 @@
     </script>
     
     <script id="person-view-template" type="text/mustache-template">
-    <div id="person-{{index}}-view-page" data-role="page">
-        <div id="person-view-header-{{index}}" data-role="header"><h1>{{first_name}} {{last_name}}</h1>
+    <div id="person-{{id}}-view-page" data-role="page">
+        <div id="person-view-header-{{id}}" data-role="header"><h1>{{first_name}} {{last_name}}</h1>
           <a data-role="button" href="/logout" data-icon="gear" data-iconpos="left" class="ui-btn-right" data-ajax="false">
             Log Out
           </a>
         </div>
-            <div id="person-view-content-{{index}}" data-role="content">
+            <div id="person-view-content-{{id}}" data-role="content">
             {{first_name}} {{last_name}} <br>
             {{riding}}
             <div class="field">
@@ -92,11 +95,9 @@
                 window.persons_list['persons'] = data;
                 addIndexToObjectList(persons_list.persons);
                 createIdIndex(persons_list.persons, person_index_by_id);
-                var template = $('#person-list-template').html();
-                var html = Mustache.to_html(template, persons_list);
+                
+                altPopulate();
 
-                $('#delegate-list').html(html);
-                $('#delegate-list').listview('refresh');
             },
             error: function(jqXHR) {
                 $('#connection_error_dialog').popup();
@@ -145,14 +146,46 @@
 
     });
     
+    function populate(){
+        var template = $('#person-list-template').html();
+        var html = Mustache.to_html(template, persons_list);
 
-    function showPerson(urlObj, person_index, options ){
-        var page_element_id = "#person-" +  person_index  + "-view-page";
+        $('#delegate-list').html(html);
+        $('#delegate-list').listview('refresh');        
+    }
+    
+    function altPopulate(){
+        //var list = _.groupBy(persons_list.persons, 'riding');
+        //underscore groupBy doesn't do the right thing
+        
+        var list = altGroupByRiding();
+        var template = $('#riding-divider-template').html();
+        var html = Mustache.to_html(template, list);
+
+        $('#delegate-list').html(html);
+        $('#delegate-list').listview('refresh');
+    }
+    
+    function altGroupByRiding(){
+        var ret_obj = {'ridings': []};
+        var list = _.pairs(_.groupBy(persons_list.persons, 'riding'));
+        
+        for (var i=0; i< list.length; i++){
+            var riding_obj = {'riding_name': list[i][0], 'people': list[i][1]}
+            ret_obj.ridings.push(riding_obj);
+        }
+        return ret_obj;
+    }
+
+    function showPerson(urlObj, person_id, options ){
+        var page_element_id = "#person-" +  person_id  + "-view-page";
         
         //add a new page if it doesn't exist
         if ($(page_element_id).length == 0){
+            var person_index = person_index_by_id[person_id];
+            var person = persons_list.persons[person_index];
             var template = $('#person-view-template').html();
-            var html = Mustache.to_html(template, persons_list['persons'][person_index]);
+            var html = Mustache.to_html(template, person);
             $("#home").after(html);
         }
         
