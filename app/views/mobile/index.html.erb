@@ -19,6 +19,15 @@
     {{/persons}}
     </script>
 
+    <script id="riding-divider-template" type="text/mustache-template">
+    <li data-role="list-divider">{{riding}}</li>
+    {{#persons}}
+      <li id='person-{{id}}'>
+        <a href="#persons?person={{index}}" >{{first_name}} {{last_name}} &mdash; {{riding}}</a>
+      </li>
+    {{/persons}}
+    </script>
+
     <script id="error-list-template" type="text/mustache-template">
       <li id='error-{{id}}'>
         <a href="#" onclick='repostObservation({{id}}, {{value}})'>
