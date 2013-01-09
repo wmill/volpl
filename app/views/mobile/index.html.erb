@@ -18,7 +18,7 @@
         <li data-role="list-divider">{{riding_name}}</li>
         {{#people}}
           <li id='person-{{id}}'>
-            <a href="#persons?person={{id}}" >{{first_name}} {{last_name}} &mdash; {{riding}}</a>
+            <a href="#persons?person={{id}}"  data-transition="slide">{{first_name}} {{last_name}} &mdash; {{riding}}</a>
           </li>
         {{/people}}
     {{/ridings}}
