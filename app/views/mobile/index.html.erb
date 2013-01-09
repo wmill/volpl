@@ -22,12 +22,12 @@
 
     <script id="riding-divider-template" type="text/mustache-template">
     {{#ridings}}
-    <li data-role="list-divider">{{riding_name}}</li>
-    {{#people}}
-      <li id='person-{{id}}'>
-        <a href="#persons?person={{id}}" >{{first_name}} {{last_name}} &mdash; {{riding}}</a>
-      </li>
-    {{/people}}
+        <li data-role="list-divider">{{riding_name}}</li>
+        {{#people}}
+          <li id='person-{{id}}'>
+            <a href="#persons?person={{id}}" >{{first_name}} {{last_name}} &mdash; {{riding}}</a>
+          </li>
+        {{/people}}
     {{/ridings}}
     </script>
 
@@ -146,6 +146,22 @@
 
     });
     
+    
+    //this function needed for
+    //_.filter(list, match_person());
+    function match_person(){
+        //returns function to be called by 'filter' 
+        //this way dom is only searched once.
+        var pattern = RegExp('^' + 'j', 'i');
+        return function(person){       
+            return ( 
+                pattern.test(person.first_name) ||
+                pattern.test(person.last_name) ||
+                pattern.test(person.riding) 
+            );
+        }
+    }
+    
     function populate(){
         var template = $('#person-list-template').html();
         var html = Mustache.to_html(template, persons_list);
@@ -155,8 +171,6 @@
     }
     
     function altPopulate(){
-        //var list = _.groupBy(persons_list.persons, 'riding');
-        //underscore groupBy doesn't do the right thing
         
         var list = altGroupByRiding();
         var template = $('#riding-divider-template').html();
