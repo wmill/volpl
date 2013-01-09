@@ -12,13 +12,6 @@
     <%= javascript_include_tag "underscore-min" %>
 
 
-    <script id="person-list-template" type="text/mustache-template">
-    {{#persons}}
-      <li id='person-{{id}}'>
-        <a href="#persons?person={{id}}" >{{first_name}} {{last_name}} &mdash; {{riding}}</a>
-      </li>
-    {{/persons}}
-    </script>
 
     <script id="riding-divider-template" type="text/mustache-template">
     {{#ridings}}
