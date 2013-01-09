@@ -96,13 +96,27 @@
                 addIndexToObjectList(persons_list.persons);
                 createIdIndex(persons_list.persons, person_index_by_id);
                 
-                altPopulate();
+                //altPopulate("");
 
             },
             error: function(jqXHR) {
                 $('#connection_error_dialog').popup();
             }
         });
+        
+        //Listen for changes in the search box
+        function apply_filter(){
+            filter_string = $("#search-basic").val();
+            console.log(filter_string);
+            if (filter_string != ""){
+                altPopulate(filter_string);
+            } 
+            else {
+                $('#delegate-list').html("");
+            }
+        }
+        $("#search-basic").keyup(apply_filter);
+        $("#search-basic").change(apply_filter);
 
  
         // Listen for any attempts to call changePage().
@@ -149,10 +163,11 @@
     
     //this function needed for
     //_.filter(list, match_person());
-    function match_person(){
+    //_.filter(persons_list.persons, (match_person("jones")));
+    function match_person(filter_string){
         //returns function to be called by 'filter' 
         //this way dom is only searched once.
-        var pattern = RegExp('^' + 'j', 'i');
+        var pattern = RegExp('^' + filter_string, 'i');
         return function(person){       
             return ( 
                 pattern.test(person.first_name) ||
@@ -170,9 +185,9 @@
         $('#delegate-list').listview('refresh');        
     }
     
-    function altPopulate(){
+    function altPopulate(filter_string){
         
-        var list = altGroupByRiding();
+        var list = altGroupByRiding(filter_string);
         var template = $('#riding-divider-template').html();
         var html = Mustache.to_html(template, list);
 
@@ -180,9 +195,10 @@
         $('#delegate-list').listview('refresh');
     }
     
-    function altGroupByRiding(){
+    function altGroupByRiding(filter_string){
+        var people = _.filter(persons_list.persons, (match_person(filter_string)));
         var ret_obj = {'ridings': []};
-        var list = _.pairs(_.groupBy(persons_list.persons, 'riding'));
+        var list = _.pairs(_.groupBy(people, 'riding'));
         
         for (var i=0; i< list.length; i++){
             var riding_obj = {'riding_name': list[i][0], 'people': list[i][1]}
@@ -314,9 +330,11 @@
       Log Out
     </a>
   </div>
-  <div data-role="content">
+  <div data-role="content">  
+    <label for="search-basic">Search Input:</label>
+    <input type="search" name="search" id="search-basic" value="" />
 
-    <ul data-role="listview" data-inset="true" data-filter="true" id='delegate-list'>
+    <ul data-role="listview" data-inset="true" id='delegate-list'>
 
     </ul>
   </div>
@@ -333,6 +351,7 @@
         <h1>Connection Error</h1>
     </div>
     <div data-role="content"  data-theme="d" class="ui-corner-bottom ui-content">
+        
         <h3 class="ui-title">Could not load "People"</h3>
         <p>Unable to populate list. Please reload page.</p>  
         <a href="#" data-role="button" data-inline="true" data-rel="back" data-transition="flow" data-theme="b">OK</a>  
