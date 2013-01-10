@@ -60,7 +60,7 @@
                     <a href="#observations?person={{id}}&amp;value=5" data-role="button">5 :(</a>
                 </fieldset>
             </div>
-            <a href="#home" data-role="button" >Back</a>
+            <a href="#home" data-role="button" data-transition="slide" data-direction="reverse">Back</a>
             
         </div>
         <div data-role="footer" data-id="page-footer" data-position="fixed">
@@ -138,7 +138,7 @@
                     var hash_vars = hash2json(u.hash);
                     console.log(hash_vars);
                     postObservation(hash_vars['person'], hash_vars['value']);
-                    $.mobile.changePage("#home");
+                    $.mobile.changePage("#home", {transition: 'slide', reverse:'true'});
                     // Make sure to tell changePage() we've handled this call so it doesn't
                     // have to do anything.
                     e.preventDefault();
