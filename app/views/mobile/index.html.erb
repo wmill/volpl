@@ -101,7 +101,7 @@
         function apply_filter(){
             filter_string = $("#search-basic").val();
             console.log(filter_string);
-            if (filter_string != ""){
+            if (filter_string.length > 1){
                 altPopulate(filter_string);
             } 
             else {
