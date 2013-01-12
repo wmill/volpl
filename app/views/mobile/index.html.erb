@@ -51,7 +51,7 @@
             {{first_name}} {{last_name}} <br>
             {{riding}}
             <div class="field">
-                <fieldset data-role="controlgroup" id='person-{{index}}-controlgroup'>
+                <fieldset data-role="controlgroup" id='person-{{id}}-controlgroup'>
                     <!-- TODO: 5 buttons or radio buttons? -->
                     <a href="#observations?person={{id}}&amp;value=1" data-role="button">1 :)</a>
                     <a href="#observations?person={{id}}&amp;value=2" data-role="button">2</a>
@@ -86,7 +86,7 @@
             
             success: function(data){
                 window.persons_list['persons'] = data;
-                addIndexToObjectList(persons_list.persons);
+                //addIndexToObjectList(persons_list.persons);
                 createIdIndex(persons_list.persons, person_index_by_id);
                 
                 //altPopulate("");
@@ -168,14 +168,6 @@
                 pattern.test(person.riding) 
             );
         }
-    }
-    
-    function populate(){
-        var template = $('#person-list-template').html();
-        var html = Mustache.to_html(template, persons_list);
-
-        $('#delegate-list').html(html);
-        $('#delegate-list').listview('refresh');        
     }
     
     function altPopulate(filter_string){
