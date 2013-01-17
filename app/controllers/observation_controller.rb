@@ -10,13 +10,13 @@ class ObservationController < ApplicationController
     @observation[:user_id] = session[:user_id]
     
     #to demo responsiveness on slow connections
-    #sleep 8
+    #sleep 12
     
     
 
 
     if @observation.save
-      render json: @observation, status: :created 
+      render json: true, status: :created 
     else
       render json: @observation.errors, status: :unprocessable_entity 
     end

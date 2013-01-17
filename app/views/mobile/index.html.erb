@@ -48,19 +48,22 @@
     
     <script id="person-view-template" type="text/mustache-template">
     <div id="person-{{id}}-view-page" data-role="page">
-        <div id="person-view-header-{{id}}" data-role="header"><h1>{{first_name}} {{last_name}}</h1>
+        <div id="person-view-header-{{id}}" data-role="header">
           <a data-role="button" href="/logout" data-icon="gear" data-iconpos="left" class="ui-btn-right" data-ajax="false">
-            Log Out
+              Log Out
           </a>
+          <h3>{{first_name}} {{last_name}}</h3>
+          
+          <div data-role="navbar">
+              <ul>
+                  <li><a href="#home">Search</a></li>
+                  <li><a href="#recent">Recent</a></li>
+                  <li><a href="#connections">Connections</a></li>
+              </ul>
+          </div>
         </div>
         <div id="person-view-content-{{id}}" data-role="content">
-            <div data-role="navbar">
-                <ul>
-                    <li><a href="#home">Search</a></li>
-                    <li><a href="#recent">Recent</a></li>
-                    <li><a href="#connections">Connections</a></li>
-                </ul>
-            </div>
+
             {{first_name}} {{last_name}} <br>
             {{riding}}
             <div class="field">
@@ -321,19 +324,21 @@
     
 <body>
 <div id="home" data-role="page">
-  <div data-role="header"><h1>Delegates</h1>
+  <div data-role="header">
     <a data-role="button" href="/logout" data-icon="gear" data-iconpos="left" class="ui-btn-right" data-ajax="false">
       Log Out
     </a>
+    <h3>Delegates</h3>
+    <div data-role="navbar">
+        <ul>
+            <li><a href="#home">Search</a></li>
+            <li><a href="#recent">Recent</a></li>
+            <li><a href="#connections">Connections</a></li>
+        </ul>
+    </div>
   </div>
   <div data-role="content">  
-      <div data-role="navbar">
-          <ul>
-              <li><a href="#home">Search</a></li>
-              <li><a href="#recent">Recent</a></li>
-              <li><a href="#connections">Connections</a></li>
-          </ul>
-      </div>
+
     <label for="search-basic">Search Input:</label>
     <input type="search" name="search" id="search-basic" value="" />
 
@@ -356,19 +361,21 @@
 </div>
 
 <div id='connections' data-role='page'>
-    <div data-role="header"><h1>Connections</h1>
+    <div data-role="header">
       <a data-role="button" href="/logout" data-icon="gear" data-iconpos="left" class="ui-btn-right" data-ajax="false">
         Log Out
       </a>
+      <h3>Connections</h3>
+      <div data-role="navbar">
+          <ul>
+              <li><a href="#home">Search</a></li>
+              <li><a href="#recent">Recent</a></li>
+              <li><a href="#connections">Connections</a></li>
+          </ul>
+      </div>
     </div>
     <div data-role="content">
-        <div data-role="navbar">
-            <ul>
-                <li><a href="#home">Search</a></li>
-                <li><a href="#recent">Recent</a></li>
-                <li><a href="#connections">Connections</a></li>
-            </ul>
-        </div>
+
     <h3>Active</h3>
     <ul id='active-connection-ul' data-role="listview" data-inset="true">
     </ul>
@@ -379,19 +386,21 @@
 </div>
 
 <div id='recent' data-role='page'>
-    <div data-role="header"><h1>Recent</h1>
+    <div data-role="header">
       <a data-role="button" href="/logout" data-icon="gear" data-iconpos="left" class="ui-btn-right" data-ajax="false">
         Log Out
       </a>
+      <h3>Recent</h3>
+      <div data-role="navbar">
+          <ul>
+              <li><a href="#home">Search</a></li>
+              <li><a href="#recent">Recent</a></li>
+              <li><a href="#connections">Connections</a></li>
+          </ul>
+      </div>
     </div>
+
     <div data-role="content">
-        <div data-role="navbar">
-            <ul>
-                <li><a href="#home">Search</a></li>
-                <li><a href="#recent">Recent</a></li>
-                <li><a href="#connections">Connections</a></li>
-            </ul>
-        </div>
         <ul id='recent-person-ul' data-role="listview" data-inset="true">
         </ul>
     </div>
