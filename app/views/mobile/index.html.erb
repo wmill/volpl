@@ -52,15 +52,15 @@
           <a data-role="button" href="/logout" data-icon="gear" data-iconpos="left" class="ui-btn-right" data-ajax="false">
             Log Out
           </a>
-        <div data-role="navbar">
-            <ul>
-                <li><a href="#home">Search</a></li>
-                <li><a href="#recent">Recent</a></li>
-                <li><a href="#connections">Connections</a></li>
-            </ul>
         </div>
-        </div>
-            <div id="person-view-content-{{id}}" data-role="content">
+        <div id="person-view-content-{{id}}" data-role="content">
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="#home">Search</a></li>
+                    <li><a href="#recent">Recent</a></li>
+                    <li><a href="#connections">Connections</a></li>
+                </ul>
+            </div>
             {{first_name}} {{last_name}} <br>
             {{riding}}
             <div class="field">
@@ -325,15 +325,15 @@
     <a data-role="button" href="/logout" data-icon="gear" data-iconpos="left" class="ui-btn-right" data-ajax="false">
       Log Out
     </a>
-    <div data-role="navbar">
-        <ul>
-            <li><a href="#home">Search</a></li>
-            <li><a href="#recent">Recent</a></li>
-            <li><a href="#connections">Connections</a></li>
-        </ul>
-    </div>
   </div>
   <div data-role="content">  
+      <div data-role="navbar">
+          <ul>
+              <li><a href="#home">Search</a></li>
+              <li><a href="#recent">Recent</a></li>
+              <li><a href="#connections">Connections</a></li>
+          </ul>
+      </div>
     <label for="search-basic">Search Input:</label>
     <input type="search" name="search" id="search-basic" value="" />
 
@@ -360,20 +360,22 @@
       <a data-role="button" href="/logout" data-icon="gear" data-iconpos="left" class="ui-btn-right" data-ajax="false">
         Log Out
       </a>
-      <div data-role="navbar">
-          <ul>
-              <li><a href="#home">Search</a></li>
-              <li><a href="#recent">Recent</a></li>
-              <li><a href="#connections">Connections</a></li>
-          </ul>
-      </div>
     </div>
+    <div data-role="content">
+        <div data-role="navbar">
+            <ul>
+                <li><a href="#home">Search</a></li>
+                <li><a href="#recent">Recent</a></li>
+                <li><a href="#connections">Connections</a></li>
+            </ul>
+        </div>
     <h3>Active</h3>
     <ul id='active-connection-ul' data-role="listview" data-inset="true">
     </ul>
     <h3>Errors</h3>
     <ul id='error-connection-ul' data-role="listview" data-inset="true">
-    </ul>    
+    </ul>
+    </div>   
 </div>
 
 <div id='recent' data-role='page'>
@@ -381,16 +383,18 @@
       <a data-role="button" href="/logout" data-icon="gear" data-iconpos="left" class="ui-btn-right" data-ajax="false">
         Log Out
       </a>
-      <div data-role="navbar">
-          <ul>
-              <li><a href="#home">Search</a></li>
-              <li><a href="#recent">Recent</a></li>
-              <li><a href="#connections">Connections</a></li>
-          </ul>
-      </div>
     </div>
-    <ul id='recent-person-ul' data-role="listview" data-inset="true">
-    </ul>   
+    <div data-role="content">
+        <div data-role="navbar">
+            <ul>
+                <li><a href="#home">Search</a></li>
+                <li><a href="#recent">Recent</a></li>
+                <li><a href="#connections">Connections</a></li>
+            </ul>
+        </div>
+        <ul id='recent-person-ul' data-role="listview" data-inset="true">
+        </ul>
+    </div>
 </div>
 <script type="text/javascript">
 
