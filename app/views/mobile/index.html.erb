@@ -18,10 +18,16 @@
         <li data-role="list-divider">{{riding_name}}</li>
         {{#people}}
           <li id='person-{{id}}'>
-            <a href="#persons?person={{id}}"  data-transition="slide">{{first_name}} {{last_name}} &mdash; {{riding}}</a>
+            <a href="#persons?person={{id}}">{{first_name}} {{last_name}} &mdash; {{riding}}</a>
           </li>
         {{/people}}
     {{/ridings}}
+    </script>
+    
+    <script id="recent-list-template" type="text/mustache-template">
+    <li id='person-{{id}}'>
+      <a href="#persons?person={{id}}">{{first_name}} {{last_name}} &mdash; {{riding}}</a>
+    </li>
     </script>
 
     <script id="error-list-template" type="text/mustache-template">
@@ -46,6 +52,13 @@
           <a data-role="button" href="/logout" data-icon="gear" data-iconpos="left" class="ui-btn-right" data-ajax="false">
             Log Out
           </a>
+        <div data-role="navbar">
+            <ul>
+                <li><a href="#home">Search</a></li>
+                <li><a href="#recent">Recent</a></li>
+                <li><a href="#connections">Connections</a></li>
+            </ul>
+        </div>
         </div>
             <div id="person-view-content-{{id}}" data-role="content">
             {{first_name}} {{last_name}} <br>
@@ -60,16 +73,8 @@
                     <a href="#observations?person={{id}}&amp;value=5" data-role="button">5 :(</a>
                 </fieldset>
             </div>
-            <a href="#home" data-role="button" data-transition="slide" data-direction="reverse">Back</a>
+            <a href="#home" data-role="button">Back</a>
             
-        </div>
-        <div data-role="footer" data-id="page-footer" data-position="fixed">
-            <div data-role="navbar">
-                <ul>
-                    <li><a href="#home">People</a></li>
-                    <li><a href="#connections">Connections</a></li>
-                </ul>
-            </div>
         </div>
     </div>
     </script>
@@ -138,7 +143,7 @@
                     var hash_vars = hash2json(u.hash);
                     console.log(hash_vars);
                     postObservation(hash_vars['person'], hash_vars['value']);
-                    $.mobile.changePage("#home", {transition: 'slide', reverse:'true'});
+                    $.mobile.changePage("#home");
                     // Make sure to tell changePage() we've handled this call so it doesn't
                     // have to do anything.
                     e.preventDefault();
@@ -202,6 +207,12 @@
             var template = $('#person-view-template').html();
             var html = Mustache.to_html(template, person);
             $("#home").after(html);
+            
+            var recent_template = $('#recent-list-template').html();
+            html = Mustache.to_html(recent_template, person);
+            $('#recent-person-ul').append(html);
+            $('#recent-person-ul').listview('refresh');
+            
         }
         
         var $page = $(page_element_id);
@@ -314,6 +325,13 @@
     <a data-role="button" href="/logout" data-icon="gear" data-iconpos="left" class="ui-btn-right" data-ajax="false">
       Log Out
     </a>
+    <div data-role="navbar">
+        <ul>
+            <li><a href="#home">Search</a></li>
+            <li><a href="#recent">Recent</a></li>
+            <li><a href="#connections">Connections</a></li>
+        </ul>
+    </div>
   </div>
   <div data-role="content">  
     <label for="search-basic">Search Input:</label>
@@ -324,19 +342,12 @@
     </ul>
   </div>
   <div data-role="footer" data-id="page-footer" data-position="fixed">
-    <div data-role="navbar">
-        <ul>
-            <li><a href="#home">People</a></li>
-            <li><a href="#connections">Connections</a></li>
-        </ul>
-    </div>
   </div>
   <div data-role="popup" id="connection_error_dialog" data-overlay-theme="a" data-theme="c" style="max-width:400px;" class="ui-corner-all">
     <div data-role="header" data-theme="a" class="ui-corner-top">
         <h1>Connection Error</h1>
     </div>
     <div data-role="content"  data-theme="d" class="ui-corner-bottom ui-content">
-        
         <h3 class="ui-title">Could not load "People"</h3>
         <p>Unable to populate list. Please reload page.</p>  
         <a href="#" data-role="button" data-inline="true" data-rel="back" data-transition="flow" data-theme="b">OK</a>  
@@ -345,20 +356,41 @@
 </div>
 
 <div id='connections' data-role='page'>
+    <div data-role="header"><h1>Connections</h1>
+      <a data-role="button" href="/logout" data-icon="gear" data-iconpos="left" class="ui-btn-right" data-ajax="false">
+        Log Out
+      </a>
+      <div data-role="navbar">
+          <ul>
+              <li><a href="#home">Search</a></li>
+              <li><a href="#recent">Recent</a></li>
+              <li><a href="#connections">Connections</a></li>
+          </ul>
+      </div>
+    </div>
     <h3>Active</h3>
     <ul id='active-connection-ul' data-role="listview" data-inset="true">
     </ul>
     <h3>Errors</h3>
     <ul id='error-connection-ul' data-role="listview" data-inset="true">
     </ul>    
-    <div data-role="footer" data-id="page-footer" data-position="fixed">
-        <div data-role="navbar">
-            <ul>
-                <li><a href="#home">People</a></li>
-                <li><a href="#connections">Connections</a></li>
-            </ul>
-        </div>
+</div>
+
+<div id='recent' data-role='page'>
+    <div data-role="header"><h1>Recent</h1>
+      <a data-role="button" href="/logout" data-icon="gear" data-iconpos="left" class="ui-btn-right" data-ajax="false">
+        Log Out
+      </a>
+      <div data-role="navbar">
+          <ul>
+              <li><a href="#home">Search</a></li>
+              <li><a href="#recent">Recent</a></li>
+              <li><a href="#connections">Connections</a></li>
+          </ul>
+      </div>
     </div>
+    <ul id='recent-person-ul' data-role="listview" data-inset="true">
+    </ul>   
 </div>
 <script type="text/javascript">
 
