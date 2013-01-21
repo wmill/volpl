@@ -1,0 +1,33 @@
+<div id="person-{{id}}-view-page" data-role="page">
+    <div id="person-view-header-{{id}}" data-role="header">
+      <a data-role="button" href="/logout" data-icon="gear" data-iconpos="left" class="ui-btn-right" data-ajax="false">
+          Log Out
+      </a>
+      <h3>{{first_name}} {{last_name}}</h3>
+      
+      <div data-role="navbar">
+          <ul>
+              <li><a href="#home">Search</a></li>
+              <li><a href="#recent">Recent</a></li>
+              <li><a href="#connections">Connections</a></li>
+          </ul>
+      </div>
+    </div>
+    <div id="person-view-content-{{id}}" data-role="content">
+
+        {{first_name}} {{last_name}} <br>
+        {{riding}}
+        <div class="field">
+            <fieldset data-role="controlgroup" id='person-{{id}}-controlgroup'>
+                <!-- TODO: 5 buttons or radio buttons? -->
+                <a href="#observations?person={{id}}&amp;value=1" data-role="button">1 :)</a>
+                <a href="#observations?person={{id}}&amp;value=2" data-role="button">2</a>
+                <a href="#observations?person={{id}}&amp;value=3" data-role="button">3 :|</a>
+                <a href="#observations?person={{id}}&amp;value=4" data-role="button">4</a>
+                <a href="#observations?person={{id}}&amp;value=5" data-role="button">5 :(</a>
+            </fieldset>
+        </div>
+        <a href="#home" data-role="button">Back</a>
+        
+    </div>
+</div>
