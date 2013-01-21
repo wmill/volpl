@@ -4,6 +4,7 @@ class PeopleController < ApplicationController
   # GET /people.json
   def index
     @people = Person.all :order => 'riding' #, :limit => 400
+
     render json: @people
   end
 

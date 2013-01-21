@@ -9,77 +9,6 @@
     <%= javascript_include_tag "application" %>
     <%= javascript_include_tag "mobile" %>
 
-
-
-
-    <script id="riding-divider-template" type="text/mustache-template">
-    {{#ridings}}
-        <li data-role="list-divider">{{riding_name}}</li>
-        {{#people}}
-          <li id='person-{{id}}'>
-            <a href="#persons?person={{id}}">{{first_name}} {{last_name}} &mdash; {{riding}}</a>
-          </li>
-        {{/people}}
-    {{/ridings}}
-    </script>
-    
-    <script id="recent-list-template" type="text/mustache-template">
-    <li id='person-{{id}}'>
-      <a href="#persons?person={{id}}">{{first_name}} {{last_name}} &mdash; {{riding}}</a>
-    </li>
-    </script>
-
-    <script id="error-list-template" type="text/mustache-template">
-      <li id='error-{{id}}'>
-        <a href="#" onclick='repostObservation({{id}}, {{value}})'>
-            Connection Error: {{first_name}} {{last_name}} &mdash; {{riding}}          
-        </a>
-      </li>
-    </script>
-
-    <script id="connection-list-template" type="text/mustache-template">
-      <li id='active-{{id}}'>
-
-            Connecting: {{value}}, {{first_name}} {{last_name}} &mdash; {{riding}}          
-
-      </li>
-    </script>
-    
-    <script id="person-view-template" type="text/mustache-template">
-    <div id="person-{{id}}-view-page" data-role="page">
-        <div id="person-view-header-{{id}}" data-role="header">
-          <a data-role="button" href="/logout" data-icon="gear" data-iconpos="left" class="ui-btn-right" data-ajax="false">
-              Log Out
-          </a>
-          <h3>{{first_name}} {{last_name}}</h3>
-          
-          <div data-role="navbar">
-              <ul>
-                  <li><a href="#home">Search</a></li>
-                  <li><a href="#recent">Recent</a></li>
-                  <li><a href="#connections">Connections</a></li>
-              </ul>
-          </div>
-        </div>
-        <div id="person-view-content-{{id}}" data-role="content">
-
-            {{first_name}} {{last_name}} <br>
-            {{riding}}
-            <div class="field">
-                <fieldset data-role="controlgroup" id='person-{{id}}-controlgroup'>
-                    <!-- TODO: 5 buttons or radio buttons? -->
-                    <a href="#observations?person={{id}}&amp;value=1" data-role="button">1 :)</a>
-                    <a href="#observations?person={{id}}&amp;value=2" data-role="button">2</a>
-                    <a href="#observations?person={{id}}&amp;value=3" data-role="button">3 :|</a>
-                    <a href="#observations?person={{id}}&amp;value=4" data-role="button">4</a>
-                    <a href="#observations?person={{id}}&amp;value=5" data-role="button">5 :(</a>
-                </fieldset>
-            </div>
-            <a href="#home" data-role="button">Back</a>
-            
-        </div>
-    </div>
-    </script>
     
     
 <script type="text/javascript" charset="utf-8">
@@ -180,8 +109,7 @@
     function altPopulate(filter_string){
         
         var list = altGroupByRiding(filter_string);
-        var template = $('#riding-divider-template').html();
-        var html = Mustache.to_html(template, list);
+        var html = HandlebarsTemplates['mobile/templates/riding-divider-template'](list);
 
         $('#delegate-list').html(html);
         $('#delegate-list').listview('refresh');
@@ -206,12 +134,12 @@
         if ($(page_element_id).length == 0){
             var person_index = person_index_by_id[person_id];
             var person = persons_list.persons[person_index];
-            var template = $('#person-view-template').html();
-            var html = Mustache.to_html(template, person);
+            
+            var html = HandlebarsTemplates['mobile/templates/person-view-template'](person);
+            
             $("#home").after(html);
             
-            var recent_template = $('#recent-list-template').html();
-            html = Mustache.to_html(recent_template, person);
+            html = HandlebarsTemplates['mobile/templates/recent-list-template'](person);
             $('#recent-person-ul').append(html);
             $('#recent-person-ul').listview('refresh');
             
@@ -264,14 +192,14 @@
         var person = persons_list.persons[person_index];
         
         //use the active connection li
-        var template = $('#connection-list-template').html();
-        var html = Mustache.to_html(template, {
+        var html = HandlebarsTemplates['mobile/templates/connection-list-template']({
             'id': person.id,
             'first_name': person.first_name ,
             'last_name': person.last_name,
             'riding': person.riding,
             'value':value,
         });
+        
                
         $('#active-connection-ul').append(html);
         $('#active-connection-ul').listview('refresh');
@@ -292,8 +220,8 @@
             
             error: function(jqXHR, textStatus, errorThrown) {
                 $("#active-" + person_id).remove();
-                var template = $('#error-list-template').html();
-                var html = Mustache.to_html(template, {
+                
+                var html = HandlebarsTemplates['mobile/templates/error-list-template']({
                     'id': person.id,
                     'first_name': person.first_name ,
                     'last_name': person.last_name,
