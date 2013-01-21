@@ -2,3 +2,4 @@
 //= require ./mustache.min
 //= require ./underscore-min
 //= require_tree ./templates
+//= require ./app
