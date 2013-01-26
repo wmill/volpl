@@ -20,6 +20,7 @@ group :assets do
 end
 
 gem 'jquery-rails'
+#gem 'rack-offline'
 
 # Use unicorn as the web server
 # gem 'unicorn'
