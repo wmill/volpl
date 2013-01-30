@@ -2,6 +2,16 @@ persons_list = {};
 person_index_by_id = {};
 
 $(function() {
+    //init page
+    $('body').append(HandlebarsTemplates['mobile/templates/home-template']());
+    $('body').append(HandlebarsTemplates['mobile/templates/recent-template']());
+    $('body').append(HandlebarsTemplates['mobile/templates/connections-template']());
+    
+    //enhance the pages, normally done lazily, but we need to write to them in the background
+    $('#connections').page();
+    $('#recent').page();
+    $('#home').page();
+    
     $.ajax({
         'url':'/people',
         'dataType':'json',
@@ -68,12 +78,10 @@ $(function() {
         }
     });
     
-    //enhance the other pages, normally done lazily, but we need to write to it in the background
-    $('#connections').page();
-    $('#recent').page();
-    $('#home').page();
+
     //load the persons data
     
+    $.mobile.changePage("#home");
 
 });
 

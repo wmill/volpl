@@ -1,5 +1,5 @@
 <!DOCTYPE html> 
-<html>
+<html >
 
 <head>
     <meta charset="utf-8">
@@ -13,88 +13,11 @@
 
     
 <body>
-<div id="home" data-role="page">
-  <div data-role="header">
-    <a data-role="button" href="/logout" data-icon="gear" data-iconpos="left" class="ui-btn-right" data-ajax="false">
-      Log Out
-    </a>
-    <h3>Delegates</h3>
-    <div data-role="navbar">
-        <ul>
-            <li><a href="#home">Search</a></li>
-            <li><a href="#recent">Recent</a></li>
-            <li><a href="#connections">Connections</a></li>
-        </ul>
-    </div>
-  </div>
-  <div data-role="content">  
 
-    <label for="search-basic">Search Input:</label>
-    <input type="search" name="search" id="search-basic" value="" />
 
-    <ul data-role="listview" data-inset="true" id='delegate-list'>
 
-    </ul>
-  </div>
-  <div data-role="footer" data-id="page-footer" data-position="fixed">
-  </div>
-  <div data-role="popup" id="connection_error_dialog" data-overlay-theme="a" data-theme="c" style="max-width:400px;" class="ui-corner-all">
-    <div data-role="header" data-theme="a" class="ui-corner-top">
-        <h1>Connection Error</h1>
-    </div>
-    <div data-role="content"  data-theme="d" class="ui-corner-bottom ui-content">
-        <h3 class="ui-title">Could not load "People"</h3>
-        <p>Unable to populate list. Please reload page.</p>  
-        <a href="#" data-role="button" data-inline="true" data-rel="back" data-transition="flow" data-theme="b">OK</a>  
-    </div>
-  </div>
-</div>
 
-<div id='connections' data-role='page'>
-    <div data-role="header">
-      <a data-role="button" href="/logout" data-icon="gear" data-iconpos="left" class="ui-btn-right" data-ajax="false">
-        Log Out
-      </a>
-      <h3>Connections</h3>
-      <div data-role="navbar">
-          <ul>
-              <li><a href="#home">Search</a></li>
-              <li><a href="#recent">Recent</a></li>
-              <li><a href="#connections">Connections</a></li>
-          </ul>
-      </div>
-    </div>
-    <div data-role="content">
 
-    <h3>Active</h3>
-    <ul id='active-connection-ul' data-role="listview" data-inset="true">
-    </ul>
-    <h3>Errors</h3>
-    <ul id='error-connection-ul' data-role="listview" data-inset="true">
-    </ul>
-    </div>   
-</div>
-
-<div id='recent' data-role='page'>
-    <div data-role="header">
-      <a data-role="button" href="/logout" data-icon="gear" data-iconpos="left" class="ui-btn-right" data-ajax="false">
-        Log Out
-      </a>
-      <h3>Recent</h3>
-      <div data-role="navbar">
-          <ul>
-              <li><a href="#home">Search</a></li>
-              <li><a href="#recent">Recent</a></li>
-              <li><a href="#connections">Connections</a></li>
-          </ul>
-      </div>
-    </div>
-
-    <div data-role="content">
-        <ul id='recent-person-ul' data-role="listview" data-inset="true">
-        </ul>
-    </div>
-</div>
 <script type="text/javascript">
 
   var _gaq = _gaq || [];
