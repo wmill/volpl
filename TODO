@@ -1,0 +1,8 @@
+Change the app to be more stateful?  Have the login as a div, so that things can be cached?  Also when there's a failure to log in we can open a dialog instead of refreshing the whole page.  However that means that people who aren't logged in can see the code.  It increases chances of theft.
+
+
+Maybe...
+-change the view buttons to radio buttons and add a submit button
+
+Multiple campaigns based on subdomain.
+This will require changes to users, people, and observations.
