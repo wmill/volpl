@@ -1,4 +1,7 @@
 Mobitrack3::Application.routes.draw do
+  resources :campaigns
+
+
   #match "/application.manifest" => Rails::Offline
   
   post "observation/create"
