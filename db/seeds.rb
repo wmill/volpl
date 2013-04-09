@@ -52,6 +52,17 @@ users = User.create(
   ]
 )
 
+campaigns = Campaign.create([
+  {
+    'name' => 'Homer Simpson',
+    'subdomain' => 'homersimpson',
+  },
+  {
+    'name' => 'Bob Twilliger',
+    'subdomain' => 'sideshowbob',
+  }
+])
+
 
 people = Person.create(
   [{'first_name'=> 'Janice', 'last_name'=> 'Resnick', 'riding'=> 'Ajax--Pickering'},

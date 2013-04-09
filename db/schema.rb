@@ -11,7 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121203223030) do
+ActiveRecord::Schema.define(:version => 20130409045925) do
+
+  create_table "campaigns", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.string   "subdomain"
+  end
 
   create_table "observations", :force => true do |t|
     t.integer  "user_id"
@@ -21,6 +28,7 @@ ActiveRecord::Schema.define(:version => 20121203223030) do
     t.string   "ip_address"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "campaign_id"
   end
 
   add_index "observations", ["person_id"], :name => "index_observations_on_person_id"
@@ -42,6 +50,11 @@ ActiveRecord::Schema.define(:version => 20121203223030) do
     t.boolean  "is_active"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "users_campaigns", :force => true do |t|
+    t.integer "user_id"
+    t.integer "campaign_id"
   end
 
 end
