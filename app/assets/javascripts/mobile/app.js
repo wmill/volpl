@@ -83,6 +83,9 @@ $(function() {
     
     $.mobile.changePage("#home");
 
+    //get rid of jqmobile ui loader
+    $('.ui-loader').remove();
+
 });
 
 
