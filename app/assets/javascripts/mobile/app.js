@@ -3,14 +3,14 @@ person_index_by_id = {};
 
 $(function() {
     //init page
-    $('body').append(HandlebarsTemplates['mobile/templates/home-template']());
+    $('body').append(HandlebarsTemplates['mobile/templates/search-template']());
     $('body').append(HandlebarsTemplates['mobile/templates/recent-template']());
     $('body').append(HandlebarsTemplates['mobile/templates/connections-template']());
     
     //enhance the pages, normally done lazily, but we need to write to them in the background
     $('#connections').page();
     $('#recent').page();
-    $('#home').page();
+    $('#search').page();
     
     $.ajax({
         'url':'/people',
@@ -70,7 +70,7 @@ $(function() {
                 var hash_vars = hash2json(u.hash);
                 console.log(hash_vars);
                 postObservation(hash_vars['person'], hash_vars['value']);
-                $.mobile.changePage("#home");
+                $.mobile.changePage("#search");
                 // Make sure to tell changePage() we've handled this call so it doesn't
                 // have to do anything.
                 e.preventDefault();
@@ -81,10 +81,10 @@ $(function() {
 
     //load the persons data
     
-    $.mobile.changePage("#home");
+    $.mobile.changePage("#search");
 
     //get rid of jqmobile ui loader
-    $('.ui-loader').remove();
+    //$('.ui-loader').remove();
 
 });
 
@@ -136,7 +136,7 @@ function showPerson(urlObj, person_id, options ){
         
         var html = HandlebarsTemplates['mobile/templates/person-view-template'](person);
         
-        $("#home").after(html);
+        $("#search").after(html);
         
         html = HandlebarsTemplates['mobile/templates/recent-list-template'](person);
         $('#recent-person-ul').append(html);

@@ -8,6 +8,7 @@ class ObservationController < ApplicationController
     @observation[:ip_address] = request.remote_ip
     @observation[:user_agent] = request.env['HTTP_USER_AGENT']
     @observation[:user_id] = session[:user_id]
+    @observation[:campaign] = Campaign.find_by_subdomain(request.subdomain)
     
     #to demo responsiveness on slow connections
     #sleep 12

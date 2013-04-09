@@ -5,7 +5,13 @@ class SessionsController < ApplicationController
 
   def create
     user_name = params[:user_name].downcase.strip
-    user = User.find_by_user_name(user_name)
+    
+    #need a more convoluted user search...
+    user = User.includes(:campaigns).where(
+      user_name: params[:user_name], 
+      campaigns: { subdomain: request.subdomain}
+    )[0]
+    
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
       redirect_to "/"
