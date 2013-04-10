@@ -15,6 +15,7 @@ class CampaignsController < ApplicationController
   # GET /campaigns/1
   # GET /campaigns/1.json
   def show
+    @campaigns = Campaign.all
     @campaign = Campaign.find(params[:id])
 
     respond_to do |format|

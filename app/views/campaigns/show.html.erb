@@ -1,20 +1,27 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <b>Name:</b>
-  <%= @campaign.name %>
-</p>
-
-<p>
-  <b>User:</b>
-  <%= @campaign.user %>
-</p>
-
-<p>
-  <b>Observation:</b>
-  <%= @campaign.observation %>
-</p>
-
-
-<%= link_to 'Edit', edit_campaign_path(@campaign) %> |
-<%= link_to 'Back', campaigns_path %>
+<div class="row">
+  <div class="large-3 columns" id="campaigns">
+  	<ul>
+    <% @campaigns.each do |campaign| %>
+      <li><%= link_to campaign.name, campaign %></li>
+    <% end %>
+		</ul>
+  </div>
+  <div class="large-9 columns">
+  	<table>
+  		<tr>
+  			<th>Person</th>
+  			<th>User</th>
+  			<th>Value</th>
+  			<th>Ip</th>
+  		</tr>
+  		<% @campaign.observations.each do |observation| %>
+  		<tr>
+  			<td> <%# "#{observation.person.first_name} #{observation.person.last_name}" %></td>
+  			<td><%= observation.user.user_name %></td>
+  			<td><%= observation.value %></td>
+  			<td><%= observation.ip_address %></td>
+  		</tr>
+  		<% end %>
+  	</table>
+  </div>
+</div>

@@ -7,6 +7,22 @@
 #   cities = City.create([{ name=> 'Chicago' }, { name=> 'Copenhagen' }])
 #   Mayor.create(name=> 'Emanuel', city=> cities.first)
 
+
+simpson = Campaign.create(
+  {
+    'name' => 'Homer Simpson',
+    'subdomain' => 'homersimpson',
+  }
+)
+
+twilliger = Campaign.create(
+  {
+    'name' => 'Bob Twilliger',
+    'subdomain' => 'sideshowbob',
+  }
+)
+
+
 users = User.create(
   [
     {
@@ -16,6 +32,7 @@ users = User.create(
       'is_active' => true,
       'is_staff' => false,
       'is_admin' => false,
+      'campaigns' => [simpson, twilliger],
     },
     {
       'user_name' => 'demo1',
@@ -24,6 +41,7 @@ users = User.create(
       'is_active' => true,
       'is_staff' => false,
       'is_admin' => false,
+      'campaigns' => [simpson],
     },
     {
       'user_name' => 'demo2',
@@ -32,6 +50,7 @@ users = User.create(
       'is_active' => true,
       'is_staff' => false,
       'is_admin' => false,
+      'campaigns' => [twilliger],
     },
     {
       'user_name' => 'staff',
@@ -52,16 +71,7 @@ users = User.create(
   ]
 )
 
-campaigns = Campaign.create([
-  {
-    'name' => 'Homer Simpson',
-    'subdomain' => 'homersimpson',
-  },
-  {
-    'name' => 'Bob Twilliger',
-    'subdomain' => 'sideshowbob',
-  }
-])
+
 
 
 people = Person.create(

@@ -1,27 +1,12 @@
-<h1>Listing campaigns</h1>
-
-<table>
-  <tr>
-    <th>Name</th>
-    <th>User</th>
-    <th>Observation</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @campaigns.each do |campaign| %>
-  <tr>
-    <td><%= campaign.name %></td>
-    <td><%= campaign.user %></td>
-    <td><%= campaign.observation %></td>
-    <td><%= link_to 'Show', campaign %></td>
-    <td><%= link_to 'Edit', edit_campaign_path(campaign) %></td>
-    <td><%= link_to 'Destroy', campaign, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Campaign', new_campaign_path %>
+<div class="row">
+  <div class="large-3 columns">
+    <ul>
+    <% @campaigns.each do |campaign| %>
+      <li><%= link_to 'Show', campaign %></li>
+    <% end %>
+    </ul>
+  </div>
+  <div class="large-9 columns">
+    Select a campaign
+  </div>
+</div>
