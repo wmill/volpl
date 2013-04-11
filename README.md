@@ -37,3 +37,7 @@ Well I was learning jQueryMobile, Handlebars, the asset pipeline, subdomains in 
 Can I have a cookie?
 --------------------
 No.
+
+Seriously, I'm not you.  Why are there no tests?
+------------------------------------------------
+I'm still figuring out how to set up the tests properly.  The data entry part is all in javascript with some rails generations, I was looking at using jasmine, but I haven't done it yet.  The backend rails code uses subdomains and I have to find out how to mock those in.
