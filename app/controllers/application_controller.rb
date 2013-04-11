@@ -13,7 +13,6 @@ class ApplicationController < ActionController::Base
       session[:subdomain] = nil
       redirect_to login_url
     end
-
   end
 
   def authorize_data_entry

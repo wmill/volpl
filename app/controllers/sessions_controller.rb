@@ -10,8 +10,9 @@ class SessionsController < ApplicationController
       user = User.find_by_user_name(user_name)
       if user && user.authenticate(params[:password])
         session[:user_id] = user.id
-        session[:subdomain] = 'admin'
+        session[:subdomain] = request[:subdomain]
         redirect_to "/campaigns"
+      end
     else
       #needed a more convoluted user search...
       user = User.includes(:campaigns).where(
@@ -32,6 +33,7 @@ class SessionsController < ApplicationController
 
   def destroy
     session[:user_id] = nil
+    session[:subdomain] = nil
     redirect_to "/"
   end
 
