@@ -12,6 +12,19 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+	<div class='row'>
+		<div class='large-12 columns'>
+			<h2>
+			<%= link_to "Campaigns", campaigns_path %> |
+			<% if @current_user.is_admin %> 
+			<%= link_to "Users", users_path %> |
+			<%= link_to "New Campaign", new_campaign_path %> |
+			<% end %>
+			<%= link_to "Log out", logout_path %>
+			</h2>
+		</div>
+	</div>
+	<hr>
 
 <%= yield %>
 <script>
