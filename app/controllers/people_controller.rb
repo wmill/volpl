@@ -1,5 +1,5 @@
 class PeopleController < ApplicationController
-  before_filter :authorize_data_entry
+  #before_filter :authorize_data_entry
   # GET /people
   # GET /people.json
   def index
