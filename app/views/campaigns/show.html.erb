@@ -10,16 +10,23 @@
   	<table class="">
   		<tr>
   			<th>Person</th>
+  			<th>Riding</th>
   			<th>User</th>
   			<th>Value</th>
+  			<th>Created</th>
   			<th>Ip</th>
+  			<th>User Agent</th>
   		</tr>
   		<% @campaign.observations.each do |observation| %>
   		<tr>
   			<td><%= observation.person ? "#{observation.person.first_name} #{observation.person.last_name}" : '-' %></td>
+  			<td><%= observation.person ? observation.person.riding : '-' %></td>
   			<td><%= observation.user ? observation.user.user_name : '-' %></td>
   			<td><%= observation.value %></td>
+  			<td><%= observation.created_at %></td>
   			<td><%= observation.ip_address %></td>
+  			<td><%= observation.user_agent %></td>
+  			
   		</tr>
   		<% end %>
   	</table>

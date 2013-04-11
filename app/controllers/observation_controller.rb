@@ -22,4 +22,6 @@ class ObservationController < ApplicationController
       render json: @observation.errors, status: :unprocessable_entity 
     end
   end
+
+
 end

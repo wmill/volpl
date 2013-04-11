@@ -21,6 +21,16 @@ class CampaignsController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @campaign }
+      format.csv do 
+        response.headers['Content-Disposition'] = "attachment; filename=\"#{@campaign.name}.csv\""
+        csv_text = CSV.generate do |csv|
+          csv << Observation.column_names
+          @campaign.observations.each do |observation|
+            csv << observation.attributes.values_at(*Observation.column_names)
+          end
+        end
+        render text: csv_text
+      end
     end
   end
 
@@ -83,4 +93,6 @@ class CampaignsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+
 end
