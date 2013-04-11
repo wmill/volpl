@@ -24,9 +24,25 @@ class CampaignsController < ApplicationController
       format.csv do 
         response.headers['Content-Disposition'] = "attachment; filename=\"#{@campaign.name}.csv\""
         csv_text = CSV.generate do |csv|
-          csv << Observation.column_names
+          csv << [
+            'Person',
+            'Riding',
+            'User',
+            'Value',
+            'Created',
+            'IP',
+            'User Agent',
+          ]
           @campaign.observations.each do |observation|
-            csv << observation.attributes.values_at(*Observation.column_names)
+            csv << [
+              observation.person ? "#{observation.person.first_name} #{observation.person.last_name}" : '-',
+              observation.person ? observation.person.riding : '-',
+              observation.user ? observation.user.user_name : '-',
+              observation.value,
+              observation.created_at,
+              observation.ip_address,
+              observation.user_agent,
+            ]
           end
         end
         render text: csv_text
