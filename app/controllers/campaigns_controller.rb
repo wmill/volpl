@@ -16,7 +16,7 @@ class CampaignsController < ApplicationController
   # GET /campaigns/1.json
   def show
     @campaigns = Campaign.all
-    @campaign = Campaign.find(params[:id])
+    @campaign = Campaign.includes(:observations => :user, :observations => :person).find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb

@@ -7,7 +7,7 @@
 		</ul>
   </div>
   <div class="large-9 columns">
-  	<table>
+  	<table class="">
   		<tr>
   			<th>Person</th>
   			<th>User</th>
@@ -16,8 +16,8 @@
   		</tr>
   		<% @campaign.observations.each do |observation| %>
   		<tr>
-  			<td> <%# "#{observation.person.first_name} #{observation.person.last_name}" %></td>
-  			<td><%= observation.user.user_name %></td>
+  			<td><%= observation.person ? "#{observation.person.first_name} #{observation.person.last_name}" : '-' %></td>
+  			<td><%= observation.user ? observation.user.user_name : '-' %></td>
   			<td><%= observation.value %></td>
   			<td><%= observation.ip_address %></td>
   		</tr>
