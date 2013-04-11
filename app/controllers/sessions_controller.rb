@@ -23,7 +23,7 @@ class SessionsController < ApplicationController
       if user && user.authenticate(params[:password])
         session[:user_id] = user.id
         session[:subdomain] = request[:subdomain]
-        redirect_to "/"
+        redirect_to mobile_index_path
       else
         flash.now.alert = "Email or password is invalid"
         render "new"
@@ -34,7 +34,16 @@ class SessionsController < ApplicationController
   def destroy
     session[:user_id] = nil
     session[:subdomain] = nil
-    redirect_to "/"
+    redirect_to login_path
+  end
+
+  def redirect
+    current_user
+    if @current_user && (@current_user.is_staff || @current_user.is_admin)
+      redirect_to campaigns_path
+    else
+      redirect_to mobile_index_path
+    end
   end
 
 end
