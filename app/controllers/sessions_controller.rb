@@ -16,7 +16,7 @@ class SessionsController < ApplicationController
     else
       #needed a more convoluted user search...
       user = User.includes(:campaigns).where(
-        user_name: params[:user_name], 
+        user_name: user_name, 
         campaigns: { subdomain: request.subdomain}
       )[0]
 
@@ -26,7 +26,7 @@ class SessionsController < ApplicationController
         redirect_to mobile_index_path
       else
         flash.now.alert = "Email or password is invalid"
-        render "new"
+        render "new", :layout => false
       end
     end
   end
