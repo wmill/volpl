@@ -13,9 +13,9 @@ class PeopleControllerTest < ActionController::TestCase
   end
 
 
-  test "should show person" do
-    get :show, id: @person.to_param
-    assert_response :success
-  end
+  # test "should show person" do
+  #   get :show, id: @person.to_param
+  #   assert_response :success
+  # end
 
 end

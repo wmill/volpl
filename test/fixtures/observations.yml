@@ -2,7 +2,7 @@
 
 one:
   user: 
-  person: 
+  person:
   value: 1
   user_agent: MyString
   ip_address: MyString

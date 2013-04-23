@@ -7,8 +7,15 @@ class ObservationControllerTest < ActionController::TestCase
   	@person = people(:one)
   end
 
-  test "should get create" do
-    get :create
+
+  test "should create observation" do
+  	observation  = observations(:one)
+  	observation.person_id = @person.id
+  	observation.id = nil
+    assert_difference('Observation.count') do
+      post :create, observation: observation.attributes
+    end
+
     assert_response :success
   end
 
