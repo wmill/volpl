@@ -2,10 +2,8 @@
 
 one:
   name: MyString
-  user: 
-  observation: 
+  subdomain: bacon
 
 two:
   name: MyString
-  user: 
-  observation: 
+  subdomain: pancakes

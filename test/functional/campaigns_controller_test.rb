@@ -3,6 +3,7 @@ require 'test_helper'
 class CampaignsControllerTest < ActionController::TestCase
   setup do
     @campaign = campaigns(:one)
+    @request.env['rack.session'][:user_id] = users(:admin).id
   end
 
   test "should get index" do

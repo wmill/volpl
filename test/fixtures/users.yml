@@ -5,7 +5,7 @@ one:
   password_digest: MyString
   is_staff: false
   is_admin: false
-  is_active: false
+  is_active: true
 
 two:
   user_name: MyString
@@ -13,3 +13,17 @@ two:
   is_staff: false
   is_admin: false
   is_active: false
+
+staff:
+  user_name: StaffPerson
+  password_digest: Dummystring
+  is_staff: true
+  is_active: true
+  is_admin: false
+
+admin:
+  user_name: AdminPerson
+  password_digest: Dummystring
+  is_admin: true
+  is_active: true
+  is_staff: true
