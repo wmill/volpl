@@ -9,11 +9,25 @@
     <%= stylesheet_link_tag "mobile" %>
 	<%= javascript_include_tag "jquery-1.8.2.min" %>
 	<%= javascript_include_tag "jquery.mobile-1.2.0.min" %>
+  <style type="text/css">
+  #flash-alerts > div {
+    border: solid #f00 2px;
+    margin: 8px;
+    padding: 8px;
+  }
+  </style>
 </head>
 <body>
 <!-- Home -->
 <div data-role="page" id="login">
     <div data-role="content">
+      <div id='flash-alerts'>
+        <% flash.each do |name, msg| %>
+          <% if msg.is_a?(String) %>
+            <%= content_tag :div, msg, :id => "flash_#{name}" %>
+          <% end %>
+        <% end %>
+      </div>
       Note: this supports multiple campaigns by subdomain
       Make sure you use <br>
       <a href="http://homersimpson.volpl.com">homersimpson.volpl.com</a><br>
@@ -22,7 +36,8 @@
       <a href="http://admin.volpl.com">admin.volpl.com</a><br>
       to see the results<br>
       Test logins: demo, demo1, demo2, staff <br>
-      Password: dev
+      Password: dev <br>
+
         <%= form_tag sessions_path, 'data-ajax'=>"false" do %>
             <div data-role="fieldcontain">
                 <fieldset data-role="controlgroup">
