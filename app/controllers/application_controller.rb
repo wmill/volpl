@@ -17,16 +17,16 @@ class ApplicationController < ActionController::Base
 
   def authorize_data_entry
     verify_domain
-    redirect_to login_url, alert: "Not authorized" if current_user.nil? or !current_user.is_active?
+    redirect_to login_url if current_user.nil? or !current_user.is_active?
   end
   
   def authorize_staff
     verify_domain
-    redirect_to login_url, alert: "Not authorized" if current_user.nil? or !current_user.is_staff? or !current_user.is_active? 
+    redirect_to login_url if current_user.nil? or !current_user.is_staff? or !current_user.is_active? 
   end
   
   def authorize_admin
     verify_domain
-    redirect_to login_url, alert: "Not authorized" if current_user.nil? or !current_user.is_admin? or !current_user.is_active?
+    redirect_to login_url if current_user.nil? or !current_user.is_admin? or !current_user.is_active?
   end
 end
