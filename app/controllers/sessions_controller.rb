@@ -12,6 +12,9 @@ class SessionsController < ApplicationController
         session[:user_id] = user.id
         session[:subdomain] = request[:subdomain]
         redirect_to "/campaigns"
+      else
+        flash.now.alert = "User name or password is invalid"
+        render "new", :layout => false
       end
     else
       #needed a more convoluted user search...
@@ -25,8 +28,8 @@ class SessionsController < ApplicationController
         session[:subdomain] = request[:subdomain]
         redirect_to mobile_index_path
       else
-        flash.now.alert = "Email or password is invalid"
-        render "new", :layout => false
+        flash.now.alert = "User name or password is invalid"
+        render "new", :layout => false   
       end
     end
   end
