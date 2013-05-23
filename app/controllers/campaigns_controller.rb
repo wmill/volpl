@@ -4,7 +4,9 @@ class CampaignsController < ApplicationController
   # GET /campaigns
   # GET /campaigns.json
   def index
-    @campaigns = Campaign.all
+    #current_user
+
+    @campaigns = @current_user.campaigns
 
     respond_to do |format|
       format.html # index.html.erb
@@ -15,7 +17,8 @@ class CampaignsController < ApplicationController
   # GET /campaigns/1
   # GET /campaigns/1.json
   def show
-    @campaigns = Campaign.all
+    #@campaigns = Campaign.all
+    @campaigns = @current_user.campaigns
     @campaign = Campaign.includes(:observations => :user, :observations => :person).find(params[:id])
 
     respond_to do |format|
